@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class Main5 {
@@ -24,7 +25,13 @@ public class Main5 {
             JsonDeserializer<Instant> instantDeserializer=new JsonDeserializer<Instant>() {
                 @Override
                 public Instant deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                    return Instant.parse(jsonElement.getAsString());
+                    try{
+                        return Instant.parse(jsonElement.getAsString());
+                    }
+                    catch(DateTimeParseException e){
+                        System.out.println("Invalid instant");
+                        return null;
+                    }
                 }
             };
 
@@ -33,7 +40,7 @@ public class Main5 {
 
             Gson customGson=gsonBuilder.create();
 
-            String json="{'name':'Vikram','age':'13','address':{'houseName':'J-78','floor':2,'instantVar':'2021-03-23T23:35:22.514Z'},'dateOfJoining':'1616149532427'}";
+            String json="{'name':'Vikram','age':'13','address':{'houseName':'J-78','floor':2,'instantVar':'abc'},'dateOfJoining':'1616149532427'}";
 
             Staff newStaff=customGson.fromJson(json,Staff.class);
 
