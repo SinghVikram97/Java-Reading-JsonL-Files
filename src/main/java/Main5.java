@@ -1,5 +1,7 @@
 import com.google.gson.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.Date;
@@ -36,6 +38,8 @@ public class Main5 {
             Staff newStaff=customGson.fromJson(json,Staff.class);
 
             System.out.println(newStaff);
+
+
         }catch(JsonSyntaxException e){
             e.printStackTrace();
         }
