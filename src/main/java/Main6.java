@@ -1,4 +1,5 @@
 import com.google.gson.*;
+import org.json.simple.parser.JSONParser;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,8 +12,7 @@ public class Main6 {
         JsonSerializer<Date> dateSerializer=new JsonSerializer<Date>() {
             @Override
             public JsonElement serialize(Date date, Type type, JsonSerializationContext jsonSerializationContext) {
-                System.out.println(date.getTime());
-                return null;
+                return new JsonPrimitive(date.getTime());
             }
         };
         try(FileWriter writer=new FileWriter("./src/main/java/abc.json")){
